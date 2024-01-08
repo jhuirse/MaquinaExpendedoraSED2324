@@ -1,0 +1,38 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity top is
+  Port ( 
+    ten_cent: in std_logic;
+    twenty_cent: in std_logic;
+    fifty_cent: in std_logic;
+    one_euro: in std_logic;
+    reset: in std_logic;
+    clk: in std_logic;
+    LED: in std_logic;
+    digsel: OUT std_logic_vector(7 DOWNTO 0);
+    segmentos: OUT std_logic_vector(7 DOWNTO 0)
+  );
+end top;
+
+architecture Behavioral of top is
+    component SYNCHRNZR
+        PORT(
+            clk: in std_logic;
+            sync_in: in std_logic;
+            sync_out: out std_logic
+        );
+    end component;
+    
+    component EDGEDTCTR
+        PORT(
+            clk: in std_logic;
+            sync_in: in std_logic;
+            edge: out std_logic
+            );
+   end component;
+   
+begin   
+
+
+end Behavioral;
