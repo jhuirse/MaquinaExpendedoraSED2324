@@ -14,6 +14,7 @@ end comparador;
 architecture Behavioral of comparador is
 
 begin
+        --inicializamos los valores de las salidas a 0.
         mayor <= '0';
         menor <= '0';
         igual <= '0';
