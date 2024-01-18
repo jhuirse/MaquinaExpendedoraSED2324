@@ -6,10 +6,10 @@ entity comparador is
     precio: in std_logic_vector(4 downto 0);
     introducido: in std_logic_vector(4 downto 0);
     reset: in std_logic;
+    clk: in std_logic;
     mayor: out std_logic;
     menor: out std_logic;
-    clk: in std_logic;
-    igual: out std_logic
+    igual: out std_logic 
   );
 end comparador;
 
