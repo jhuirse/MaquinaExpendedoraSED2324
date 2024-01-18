@@ -1,0 +1,14 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.NUMERIC_STD.ALL;
+
+entity fsm is
+  port (
+
+  );
+end fsm;
+
+architecture behavioral of fsm is 
+  begin
+  
+  end behavioral
