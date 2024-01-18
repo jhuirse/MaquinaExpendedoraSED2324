@@ -7,7 +7,7 @@ entity top is
     twenty_cent: in std_logic;
     fifty_cent: in std_logic;
     one_euro: in std_logic;
-    moneda: in std_logic_vector(3 to 0);  --ver si se puede poner asi las monedas para el for generate del sync, debouncer y edge detector
+    moneda: in std_logic_vector(3 to 0);
     reset: in std_logic;
     clk: in std_logic;
     LED: in std_logic;
@@ -21,34 +21,34 @@ architecture Behavioral of top is
         PORT(
             clk: in std_logic;
             sync_in: in std_logic;
-            sync_out: out std_logic
+            sync_out: out std_logic;
+            reset: in std_logic
         );
     end component;
-    
     component EDGEDTCTR
         PORT(
             clk: in std_logic;
             sync_in: in std_logic;
-            edge: out std_logic
+            edge: out std_logic;
+            reset: in std_logic
             );
    end component;
-       component debouncer
+    component debouncer
         PORT(
-          btn_in	: in std_logic;
+            btn_in	: in std_logic;
 	        btn_out	: out std_logic;
-	        reset: in std_logic
+	        reset: in std_logic;
+	        clk: in std_logic
             );
    end component;
      component contador
         PORT(
-            CLK : in STD_LOGIC;          
+           CLK : in STD_LOGIC;          
            ten_cent : in STD_LOGIC;    
            twenty_cent : in STD_LOGIC;  
            fifty_cent : in STD_LOGIC;   
            one_euro : in STD_LOGIC;     
-           RESET : in STD_LOGIC;        
-           ERROR : in STD_LOGIC;       
-           VENDING : in STD_LOGIC;      
+           RESET : in STD_LOGIC;             
            CUENTA : out STD_LOGIC_VECTOR (3 downto 0)
             );
    end component;
@@ -62,7 +62,88 @@ architecture Behavioral of top is
             segmentos : OUT std_logic_vector(7 DOWNTO 0)
             );
    end component;
+   signal a: std_logic_vector(3 downto 0);
+   signal b: std_logic_vector(3 downto 0);
+   signal c: std_logic_vector(3 downto 0);
 begin   
-
-
+    inst_sincro10: synchrnzr port map(
+     sync_in=> ten_cent,
+     sync_out=>a(0),
+     clk=>clk,
+     reset=>reset
+     );
+     inst_deboun10: debouncer port map(
+     btn_in=> a(0),
+     btn_out=>b(0),
+     clk=>clk,
+     reset=>reset
+     );
+     inst_edge10: EDGEDTCTR port map(
+     sync_in=> b(0),
+     clk=>clk,
+     edge=>c(0),
+     reset=>reset
+     );
+     inst_sincro20: synchrnzr port map(
+     sync_in=> ten_cent,
+     sync_out=>a(1),
+     clk=>clk,
+     reset=>reset
+     );
+     inst_deboun20: debouncer port map(
+     btn_in=> a(1),
+     btn_out=>b(1),
+     clk=>clk,
+     reset=>reset
+     );
+     inst_edge20: EDGEDTCTR port map(
+     sync_in=> b(1),
+     clk=>clk,
+     edge=>c(1),
+     reset=>reset
+     );
+         inst_sincro50: synchrnzr port map(
+     sync_in=> ten_cent,
+     sync_out=>a(2),
+     clk=>clk,
+     reset=>reset
+     );
+     inst_deboun50: debouncer port map(
+     btn_in=> a(2),
+     btn_out=>b(2),
+     clk=>clk,
+     reset=>reset
+     );
+     inst_edge50: EDGEDTCTR port map(
+     sync_in=> b(2),
+     clk=>clk,
+     edge=>c(2),
+     reset=>reset
+     );
+         inst_sincroeuro: synchrnzr port map(
+     sync_in=> ten_cent,
+     sync_out=>a(3),
+     clk=>clk,
+     reset=>reset
+     );
+     inst_debouneuro: debouncer port map(
+     btn_in=> a(3),
+     btn_out=>b(3),
+     clk=>clk,
+     reset=>reset
+     );
+     inst_edgeeuro: EDGEDTCTR port map(
+     sync_in=> b(3),
+     clk=>clk,
+     edge=>c(3),
+     reset=>reset
+     );
+     inst_contador: contador port map(
+     ten_cent=> c(0),
+     twenty_cent=> c(1),
+     fifty_cent=> c(2),
+     one_euro=> c(3),
+     clk=>clk,
+     reset=>reset
+     );
 end Behavioral;
