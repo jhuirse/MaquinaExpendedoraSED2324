@@ -76,5 +76,10 @@ begin
                 "1000" when "01000",
                 "1001" when "01001",
                 "1010" when "01010",
-                "1011" when others;
+                "1011" when "01011",
+                "1100" when "01100",
+                "1101" when "01101",
+                "1110" when "01110",
+                "1111" when others;
+
 end Behavioral;
