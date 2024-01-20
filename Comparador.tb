@@ -1,0 +1,42 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity tb_comparador is
+end tb_comparador;
+
+architecture tb of tb_comparador is
+
+    component comparador
+        port (precio      : in std_logic_vector (3 downto 0);
+              introducido : in std_logic_vector (3 downto 0);
+              mayor       : out std_logic;
+              menor       : out std_logic;
+              igual       : out std_logic);
+    end component;
+
+    signal precio      : std_logic_vector (3 downto 0);
+    signal introducido : std_logic_vector (3 downto 0);
+    signal mayor       : std_logic;
+    signal menor       : std_logic;
+    signal igual       : std_logic;
+
+begin
+
+    dut : comparador
+    port map (precio      => precio,
+              introducido => introducido,
+              mayor       => mayor,
+              menor       => menor,
+              igual       => igual);
+
+    stimuli : process
+    begin
+        -- Inicializacion
+        precio <= (others => '0');
+        introducido <= (others => '0');
+
+        -- TEST
+
+        wait;
+    end process;
+end tb;
