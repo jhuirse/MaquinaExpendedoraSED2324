@@ -29,4 +29,33 @@ architecture behavioral of fsm is
       current_state <= next_state;
     end if;
   end process;
-  end behavioral
+
+nextstate: process (confirmar,igual,current_state)
+  begin
+    next_state <= current_state;
+    case current_state is
+     when S0 =>
+     case producto is     -- Selección de producto con switches en el primer estado
+       when "00" =>
+         fijo <= "0110";  
+       when "01" =>
+         fijo <= "1100"; 
+       when "10" =>
+         fijo <= "1001";  
+       when others =>
+         fijo <= "1110";
+       end case;
+
+        if confirmar = '1' then  -- Switch de confirmación
+           next_state <= S1;
+         end if;
+     when S1 =>
+        if igual='1' then        -- Comparador indica que el precio fijo es igual al precio del sumador
+          next_state <= S2;
+        end if;
+      when S2 =>
+      light<='1','0' after 3000ms; --LED se enciende por 3 segundos y pasa de estado
+      next_state <= S0;
+    end case;
+  end process;
+end behavioral;
