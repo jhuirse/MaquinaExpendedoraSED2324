@@ -4,7 +4,15 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity fsm is
   port (
-
+    RESET       : in  std_logic;
+    CLK         : in  std_logic;
+    producto    : in  std_logic_vector(1 downto 0);
+    confirmar   : in  std_logic; -- switch aceptar
+    LIGHT       : out std_logic;
+    igual       : in  std_logic;
+    menor       : in  std_logic;
+    fijo        : out std_logic_vector(3 downto 0);
+    vending     : out std_logic
   );
 end fsm;
 
