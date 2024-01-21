@@ -63,7 +63,7 @@ begin
        end if;
     end process;
     
- --La cuenta de salida podrá ir de 0 a 10, si la suma en cuenta_aux es mayor, la salida tomará el valor 11 (1011)   
+ --La cuenta de salida podrá ir de 0 a 14, si la suma en cuenta_aux es mayor, la salida tomará el valor 15 (1111)   
     with cuenta_aux select
         CUENTA<="0000" when "00000",
                 "0001" when "00001",
