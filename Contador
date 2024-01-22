@@ -13,7 +13,9 @@ entity CONTADOR is
            RESET : in STD_LOGIC;        -- Entrada para la señal de RESET 
            ERROR : in STD_LOGIC;        -- Entrada para el bit de error de la máquina 
            VENDING : in STD_LOGIC;      -- Entrada para el bit de venta de la máquina
-           CUENTA : out STD_LOGIC_VECTOR (3 downto 0));  -- Salida con el valor de la cuenta del dinero introducido
+           CUENTA : out STD_LOGIC_VECTOR (3 downto 0);  -- Salida con el valor de la cuenta del dinero introducido
+           reinicio: in std_logic
+           );
 end CONTADOR;
 
  
@@ -40,8 +42,9 @@ begin
         --Si el bit de error o de venta está activo, la cuenta del dinero se reiniciará a cero      
             if ERROR='1' then
                 cuenta_aux<="00000";
-            elsif VENDING='1' then
-                cuenta_aux<="00000";              
+            elsif reinicio='1' then
+                cuenta_aux<="00000";
+                             
             else
             --Si la señal de 10cents está activa, se le sumará 1 unidad a la cuenta 
                 if diez='1' then
