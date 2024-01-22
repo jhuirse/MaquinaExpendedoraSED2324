@@ -46,13 +46,13 @@ begin
 
   clk_process :process
   begin
-    clk <= '0';
+    CLK <= '0';
     wait for 0.5 * clk_period;
-    clk <= '1';
+    CLK <= '1';
     wait for 0.5 * clk_period;
   end process;
 
-  reset <= '1' after 0.25 * clk_period, '0' after 0.75 * clk_period;
+  RESET <= '1' after 0.25 * clk_period, '0' after 0.75 * clk_period;
 
     stimuli : process
     begin
@@ -88,3 +88,4 @@ begin
 
         wait;
     end process;
+end tb;
