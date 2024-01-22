@@ -4,7 +4,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
  
 
-entity Display_variable is
+entity display_variable is
   PORT(cuenta : IN std_logic_vector(3 DOWNTO 0);
     clk: IN std_logic;
     error: IN std_logic;
@@ -12,11 +12,11 @@ entity Display_variable is
     digsel : OUT std_logic_vector(7 DOWNTO 0);
     segmentos : OUT std_logic_vector(7 DOWNTO 0) --teniendo en cuenta el punto del display será vector de 8 bits
     );
-end Display;
+end display_variable;
 
  
 
-architecture Behavioral of Display_variable is
+architecture Behavioral of display_variable is
     signal numero : integer;
     signal anodos: natural range 0 to 7 :=0;
      signal show: natural range 0 to 18 :=0;
@@ -59,20 +59,20 @@ begin
       
       if error='1' then --ERRoR
          case anodos is
+           when 0=>digsel <="11111110";
+           when 1=>digsel <="11111101";
+           when 2=>digsel <="11111011";
            when 3=>digsel <="11110111";
-           when 4=>digsel <="11101111";
-           when 5=>digsel <="11011111";
-           when 6=>digsel <="10111111";
-           when 7=>digsel <="01111111";
+           when others=>digsel<="11111111";
          end case;
       end if;
       
        if vending='1' then --SoLD
          case anodos is
-           when 4=>digsel <="11111110";
-           when 5=>digsel <="11111101";
-           when 6=>digsel <="11111011";
-           when 7=>digsel <="11110111";
+           when 0=>digsel <="11111110";
+           when 1=>digsel <="11111101";
+           when 2=>digsel <="11111011";
+           when 3=>digsel <="11110111";
            when others=>digsel<="11111111";
          end case;
       end if;
@@ -219,11 +219,10 @@ end if;
         
          if error='1' then --ERRoR
         case anodos is
-           when 3=>show<=14;--R
-           when 4=>show<=13;--o
-           when 5=>show<=14;--R
-           when 6=>show<=14;--R
-           when 7=>show<=11;--E
+           when 0=>show<=13;--o
+           when 1=>show<=14;--R
+           when 2=>show<=14;--R
+           when 3=>show<=11;--E
            when others=>show<=18;--no muestra nada en display
          end case;
         end if;
@@ -231,10 +230,10 @@ end if;
         if vending='1' then --Producto vendido
         case anodos is
          --SoLD
-           when 4=>show<=10;--D
-           when 5=>show<=12;--L
-           when 6=>show<=13;--o
-           when 7=>show<=15;--S
+           when 0=>show<=10;--D
+           when 1=>show<=12;--L
+           when 2=>show<=13;--o
+           when 3=>show<=15;--S
            when others=>show<=18;--no muestra nada en display
          end case;
         end if;
