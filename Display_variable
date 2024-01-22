@@ -217,7 +217,7 @@ if numero=14 then --1.4€
     end case;
 end if;
         
-         if error='1' then --ERRoR
+         if error='0' then --ERRoR
         case anodos is
            when 0=>show<=13;--o
            when 1=>show<=14;--R
