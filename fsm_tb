@@ -61,9 +61,30 @@ begin
         igual <= '0';
         menor <= '0';
 
-
-        -- Test
         wait for 100 * clk_period;
-        
+        confirmar <= '1';
+        wait for 10 * clk_period;
+        confirmar <= '0';
+        wait for 10 * clk_period;
+
+        igual <= '1';
+        wait for 10 * clk_period;
+        igual <= '0';
+        wait for 10 * clk_period;
+
+        wait for 50 * clk_period;
+        assert LIGHT = '1'
+            report "Test no ok. Fallo en estado 2. LIGHT debería ser 1."
+            severity failure;
+
+        wait for 3000 * clk_period;
+        assert LIGHT = '0'
+            report "Test no ok. Fallo en estado 2. LIGHT debería ser 0."
+            severity failure;
+
+        assert false
+            report "[PASSED].Test correcto"
+            severity failure;
+
         wait;
     end process;
