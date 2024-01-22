@@ -57,7 +57,7 @@ begin
        end if;
          
       
-      if error='1' then --ERRoR
+      if error='0' then --ERRoR
          case anodos is
            when 0=>digsel <="11111110";
            when 1=>digsel <="11111101";
@@ -80,8 +80,18 @@ begin
    end process;
    
    --Indicar en cada caso qué números o letras se mostrarán en los displays
-   process(anodos)
+   process(anodos,vending)
      begin
+      if vending='1' then --Producto vendido
+        case anodos is
+         --SoLD
+           when 0=>show<=10;--D
+           when 1=>show<=12;--L
+           when 2=>show<=13;--o
+           when 3=>show<=15;--S
+           when others=>show<=18;--no muestra nada en display
+          end case;
+       else
        if numero=0 then --0€
         case anodos is
            when 0=>show<=0;
@@ -227,16 +237,8 @@ end if;
          end case;
         end if;
         
-        if vending='1' then --Producto vendido
-        case anodos is
-         --SoLD
-           when 0=>show<=10;--D
-           when 1=>show<=12;--L
-           when 2=>show<=13;--o
-           when 3=>show<=15;--S
-           when others=>show<=18;--no muestra nada en display
-         end case;
-        end if;
+       end if;
+         
         
    end process;
   
