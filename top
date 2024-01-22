@@ -75,8 +75,8 @@ architecture Behavioral of top is
    
    component comparador
             Port (
-    precio: in std_logic_vector(4 downto 0);
-    introducido: in std_logic_vector(4 downto 0);
+    precio: in std_logic_vector(3 downto 0);
+    introducido: in std_logic_vector(3 downto 0);
     mayor: out std_logic;
     menor: out std_logic;
     igual: out std_logic 
