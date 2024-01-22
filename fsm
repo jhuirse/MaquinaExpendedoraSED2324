@@ -20,6 +20,8 @@ architecture behavioral of fsm is
   type STATES is (S0, S1, S2);
   signal current_state: STATES;
   signal next_state: STATES;
+  signal l_i : std_logic;
+  signal v_i : std_logic;
   begin
   state_register: process (RESET, CLK)
   begin
@@ -35,6 +37,7 @@ nextstate: process (confirmar,igual,current_state)
     next_state <= current_state;
     case current_state is
      when S0 =>
+     v_i <= '0';
      case producto is     -- Selección de producto con switches en el primer estado
        when "00" =>
          fijo <= "0110";  
@@ -54,8 +57,14 @@ nextstate: process (confirmar,igual,current_state)
           next_state <= S2;
         end if;
       when S2 =>
-      light<='1','0' after 3000ms; --LED se enciende por 3 segundos y pasa de estado
+      if l_i = '0' and v_i = '1' then
       next_state <= S0;
+      else
+      l_i<='1','0' after 3000 ns; --LED se enciende por 3 segundos y pasa de estado
+      v_i <= '1';
+      end if;
     end case;
   end process;
+LIGHT <= l_i;
+vending <= v_i;
 end behavioral;
