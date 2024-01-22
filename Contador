@@ -6,10 +6,10 @@ use ieee.std_logic_arith.all;
 
 entity CONTADOR is
     Port ( CLK : in STD_LOGIC;          -- Entrada de la señal de reloj 
-           ten_cent : in STD_LOGIC;     -- Entrada para la señal de 10 cents 
-           twenty_cent : in STD_LOGIC;  -- Entrada para la señal de 20 cents 
-           fifty_cent : in STD_LOGIC;   -- Entrada para la señal de 50 cents 
-           one_euro : in STD_LOGIC;     -- Entrada para la señal de 1 euro 
+           diez : in STD_LOGIC;     -- Entrada para la señal de 10 cents 
+           veinte : in STD_LOGIC;  -- Entrada para la señal de 20 cents 
+           cincuenta : in STD_LOGIC;   -- Entrada para la señal de 50 cents 
+           euro : in STD_LOGIC;     -- Entrada para la señal de 1 euro 
            RESET : in STD_LOGIC;        -- Entrada para la señal de RESET 
            ERROR : in STD_LOGIC;        -- Entrada para el bit de error de la máquina 
            VENDING : in STD_LOGIC;      -- Entrada para el bit de venta de la máquina
@@ -44,19 +44,19 @@ begin
                 cuenta_aux<="00000";              
             else
             --Si la señal de 10cents está activa, se le sumará 1 unidad a la cuenta 
-                if ten_cent='1' then
+                if diez='1' then
                   cuenta_aux<=cuenta_aux+"00001";
                 end if;
             --Si la señal de 20cents está activa, se le sumaran 2 unidades a la cuenta  
-                if twenty_cent='1' then
+                if veinte='1' then
                   cuenta_aux<=cuenta_aux+"00010";
                 end if;
             --Si la señal de 50cents está activa, se le sumaran 5 unidades a la cuenta     
-                if fifty_cent='1' then
+                if cincuenta='1' then
                   cuenta_aux<=cuenta_aux+"00101";
                 end if;
             --Si la señal de 1euro está activa, se le sumaran 10 unidades a la cuenta   
-                if one_euro='1' then
+                if euro='1' then
                   cuenta_aux<=cuenta_aux+"01010";                
                 end if;
             end if;
