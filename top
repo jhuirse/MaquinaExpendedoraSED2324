@@ -1,4 +1,3 @@
-
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
@@ -14,7 +13,8 @@ entity top is
     seg: OUT std_logic_vector(7 DOWNTO 0);
     digsel_variable: OUT std_logic_vector(7 DOWNTO 0);
     product: in  std_logic_vector(1 downto 0);
-    conf: in std_logic
+    conf: in std_logic;
+    volver: in std_logic
   );
 end top;
 
@@ -53,7 +53,8 @@ architecture Behavioral of top is
            RESET : in STD_LOGIC;             
            CUENTA : out STD_LOGIC_VECTOR (3 downto 0);
            vending: in std_logic;
-           error: in std_logic
+           error: in std_logic;
+           reinicio: in std_logic
             );
    end component;
    component fsm
@@ -66,7 +67,8 @@ architecture Behavioral of top is
     igual     : in  std_logic;
     menor     : in  std_logic;
     fijo     : out std_logic_vector(3 downto 0);
-    vending     : out std_logic
+    vending     : out std_logic;
+    reinicio    : in std_logic
   );
   end component;
    
@@ -184,7 +186,8 @@ begin
      reset=>resetear,
      cuenta=>d,
      vending=>v,
-     error=>err
+     error=>err,
+     reinicio=> volver
      );
      inst_comparador: comparador port map(
         precio=>prec,
@@ -202,7 +205,8 @@ begin
         clk=> clk,
         LIGHT=> LED,
         fijo=> prec,
-        vending=> v
+        vending=> v,
+        reinicio=> volver
      );
      inst_display_variable: display_variable port map(
         cuenta=>d,
@@ -213,4 +217,3 @@ begin
         vending=> v
      );
 end Behavioral;
-
