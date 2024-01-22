@@ -5,7 +5,7 @@ use IEEE.STD_LOGIC_1164.ALL;
  
 
 entity Display_variable is
-  PORT(producto : IN std_logic_vector(3 DOWNTO 0);
+  PORT(fijo : IN std_logic_vector(3 DOWNTO 0);
     clk: IN std_logic;
     digsel : OUT std_logic_vector(7 DOWNTO 0);
     segmentos : OUT std_logic_vector(7 DOWNTO 0) --teniendo en cuenta el punto del display será vector de 8 bits
