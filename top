@@ -10,10 +10,12 @@ entity top is
     resetear: in std_logic;
     clk: in std_logic;
     LED: out std_logic;
-    digselect_fijo: OUT std_logic_vector(7 DOWNTO 0);
-    digselect_variable: OUT std_logic_vector(7 DOWNTO 0);
-    segment_fijo: OUT std_logic_vector(7 DOWNTO 0);
-    segment_variable: OUT std_logic_vector(7 DOWNTO 0);
+    seg_fijo: OUT std_logic_vector(7 DOWNTO 0);
+    digsel_fijo: OUT std_logic_vector(7 DOWNTO 0);
+
+    seg_variable: OUT std_logic_vector(7 DOWNTO 0);
+    digsel_variable: OUT std_logic_vector(7 DOWNTO 0);
+
     product: in  std_logic_vector(1 downto 0);
     conf: in std_logic
   );
@@ -70,16 +72,6 @@ architecture Behavioral of top is
     vending     : out std_logic
   );
   end component;
-   component display
-        PORT(
-            cuenta : IN std_logic_vector(3 DOWNTO 0);
-            clk: IN std_logic;
-            error: IN std_logic;
-            vending: IN std_logic;
-            digsel : OUT std_logic_vector(7 DOWNTO 0);
-            segmentos : OUT std_logic_vector(7 DOWNTO 0)
-            );
-   end component;
    
    component comparador
             Port (
@@ -90,17 +82,16 @@ architecture Behavioral of top is
     igual: out std_logic 
   );
    end component;
-   component displayfijo
+   
+   component display_fijo
    PORT(cuenta : IN std_logic_vector(3 DOWNTO 0);
     clk: IN std_logic;
-    error: IN std_logic;
-    vending: IN std_logic;
     digsel : OUT std_logic_vector(7 DOWNTO 0);
     segmentos : OUT std_logic_vector(7 DOWNTO 0) 
     );
    end component;
    
-   component displayvariable
+   component display_variable
    PORT(cuenta : IN std_logic_vector(3 DOWNTO 0);
     clk: IN std_logic;
     error: IN std_logic;
@@ -222,20 +213,19 @@ begin
         fijo=> prec,
         vending=> v
      );
-     inst_displayfijo: displayfijo port map(
+     inst_display_fijo: display_fijo port map(
         cuenta=>prec,
         clk=>clk,
-        error=>err,
-        vending=>v,
-        digsel=>digselect_fijo,
-        segmentos=>segment_fijo
+        digsel=>digsel_fijo,
+        segmentos=>seg_fijo
      );
-     inst_displayvariable: displayvariable port map(
+     inst_display_variable: display_variable port map(
         cuenta=>d,
         clk=>clk,
-        error=>err,
-        vending=>v,
-        digsel=>digselect_variable,
-        segmentos=>segment_variable
+        digsel=>digsel_variable,
+        segmentos=>seg_variable,
+        error=>resetear,
+        vending=> v
      );
 end Behavioral;
+
