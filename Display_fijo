@@ -4,17 +4,17 @@ use IEEE.STD_LOGIC_1164.ALL;
 
  
 
-entity Display_variable is
+entity display_fijo is
   PORT(fijo : IN std_logic_vector(3 DOWNTO 0);
     clk: IN std_logic;
     digsel : OUT std_logic_vector(7 DOWNTO 0);
     segmentos : OUT std_logic_vector(7 DOWNTO 0) --teniendo en cuenta el punto del display será vector de 8 bits
     );
-end Display;
+end display_fijo;
 
  
 
-architecture Behavioral of Display_variable is
+architecture Behavioral of display_fijo is
     signal numero : integer;
     signal anodos: natural range 0 to 7 :=0;
      signal show: natural range 0 to 18 :=0;
