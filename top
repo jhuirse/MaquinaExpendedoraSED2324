@@ -1,3 +1,4 @@
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
@@ -10,12 +11,8 @@ entity top is
     resetear: in std_logic;
     clk: in std_logic;
     LED: out std_logic;
-    seg_fijo: OUT std_logic_vector(7 DOWNTO 0);
-    digsel_fijo: OUT std_logic_vector(7 DOWNTO 0);
-
-    seg_variable: OUT std_logic_vector(7 DOWNTO 0);
+    seg: OUT std_logic_vector(7 DOWNTO 0);
     digsel_variable: OUT std_logic_vector(7 DOWNTO 0);
-
     product: in  std_logic_vector(1 downto 0);
     conf: in std_logic
   );
@@ -49,10 +46,10 @@ architecture Behavioral of top is
      component contador
         PORT(
            CLK : in STD_LOGIC;          
-           ten_cent : in STD_LOGIC;    
-           twenty_cent : in STD_LOGIC;  
-           fifty_cent : in STD_LOGIC;   
-           one_euro : in STD_LOGIC;     
+           diez : in STD_LOGIC;    
+           veinte : in STD_LOGIC;  
+           cincuenta : in STD_LOGIC;   
+           euro : in STD_LOGIC;     
            RESET : in STD_LOGIC;             
            CUENTA : out STD_LOGIC_VECTOR (3 downto 0);
            vending: in std_logic;
@@ -83,13 +80,7 @@ architecture Behavioral of top is
   );
    end component;
    
-   component display_fijo
-   PORT(cuenta : IN std_logic_vector(3 DOWNTO 0);
-    clk: IN std_logic;
-    digsel : OUT std_logic_vector(7 DOWNTO 0);
-    segmentos : OUT std_logic_vector(7 DOWNTO 0) 
-    );
-   end component;
+   
    
    component display_variable
    PORT(cuenta : IN std_logic_vector(3 DOWNTO 0);
@@ -185,10 +176,10 @@ begin
      reset=>resetear
      );
      inst_contador: contador port map(
-     ten_cent=> c(0),
-     twenty_cent=> c(1),
-     fifty_cent=> c(2),
-     one_euro=> c(3),
+     diez=> c(0),
+     veinte=> c(1),
+     cincuenta=> c(2),
+     euro=> c(3),
      clk=>clk,
      reset=>resetear,
      cuenta=>d,
@@ -209,21 +200,15 @@ begin
         producto =>product,
         reset => resetear,
         clk=> clk,
-        light=> LED,
+        LIGHT=> LED,
         fijo=> prec,
         vending=> v
-     );
-     inst_display_fijo: display_fijo port map(
-        cuenta=>prec,
-        clk=>clk,
-        digsel=>digsel_fijo,
-        segmentos=>seg_fijo
      );
      inst_display_variable: display_variable port map(
         cuenta=>d,
         clk=>clk,
         digsel=>digsel_variable,
-        segmentos=>seg_variable,
+        segmentos=>seg,
         error=>resetear,
         vending=> v
      );
