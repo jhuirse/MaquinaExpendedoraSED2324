@@ -14,16 +14,21 @@ end comparador;
 architecture Behavioral of comparador is
 
 begin
-        --inicializamos los valores de las salidas a 0.
+
+    process(precio, introducido)
+    variable p_i,i_i : integer;
+    begin
+    p_i := to_integer(unsigned(precio));
+    i_i := to_integer(unsigned(introducido));
+
+     --inicializamos los valores de las salidas a 0.
         mayor <= '0';
         menor <= '0';
         igual <= '0';
 
-    process(precio, introducido)
-    begin
-        if precio < introducido then
+        if i_i > p_i then
             mayor <= '1';
-        elsif precio = introducido then
+        elsif p_i = i_i then
             igual <= '1';
         else
              menor <= '1';
