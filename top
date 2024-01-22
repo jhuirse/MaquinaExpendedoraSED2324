@@ -25,7 +25,7 @@ architecture Behavioral of top is
     component SYNCHRNZR
         PORT(
             clk: in std_logic;
-            sync_in: in std_logic;
+            async_in: in std_logic;
             sync_out: out std_logic;
             reset: in std_logic
         );
@@ -113,7 +113,7 @@ architecture Behavioral of top is
    
 begin   
     inst_sincro10: synchrnzr port map(
-     sync_in=> ten_cent,
+     async_in=> ten_cent,
      sync_out=>a(0),
      clk=>clk,
      reset=>resetear
@@ -131,7 +131,7 @@ begin
      reset=>resetear
      );
      inst_sincro20: synchrnzr port map(
-     sync_in=> twenty_cent,
+     async_in=> twenty_cent,
      sync_out=>a(1),
      clk=>clk,
      reset=>resetear
@@ -149,7 +149,7 @@ begin
      reset=>resetear
      );
          inst_sincro50: synchrnzr port map(
-     sync_in=> fifty_cent,
+     async_in=> fifty_cent,
      sync_out=>a(2),
      clk=>clk,
      reset=>resetear
@@ -167,7 +167,7 @@ begin
      reset=>resetear
      );
          inst_sincroeuro: synchrnzr port map(
-     sync_in=> one_euro,
+     async_in=> one_euro,
      sync_out=>a(3),
      clk=>clk,
      reset=>resetear
