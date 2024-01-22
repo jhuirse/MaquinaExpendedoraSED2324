@@ -4,7 +4,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
  
 
-entity Display is
+entity Display_variable is
   PORT(cuenta : IN std_logic_vector(3 DOWNTO 0);
     clk: IN std_logic;
     error: IN std_logic;
@@ -16,7 +16,7 @@ end Display;
 
  
 
-architecture Behavioral of Display is
+architecture Behavioral of Display_variable is
     signal numero : integer;
     signal anodos: natural range 0 to 7 :=0;
      signal show: natural range 0 to 18 :=0;
