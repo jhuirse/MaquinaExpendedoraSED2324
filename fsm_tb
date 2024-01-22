@@ -1,0 +1,69 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity tb_fsm is
+end tb_fsm;
+
+architecture tb of tb_fsm is
+
+    component fsm
+        port (RESET     : in std_logic;
+              CLK       : in std_logic;
+              producto  : in std_logic_vector (1 downto 0);
+              confirmar : in std_logic;
+              LIGHT     : out std_logic;
+              igual     : in std_logic;
+              menor     : in std_logic;
+              fijo      : out std_logic_vector (3 downto 0);
+              vending   : out std_logic);
+    end component;
+
+    signal RESET     : std_logic;
+    signal CLK       : std_logic;
+    signal producto  : std_logic_vector (1 downto 0);
+    signal confirmar : std_logic;
+    signal LIGHT     : std_logic;
+    signal igual     : std_logic;
+    signal menor     : std_logic;
+    signal fijo      : std_logic_vector (3 downto 0);
+    signal vending   : std_logic;
+
+    constant clk_period: time := 10 ns;
+    
+
+begin
+
+    dut : fsm
+    port map (RESET     => RESET,
+              CLK       => CLK,
+              producto  => producto,
+              confirmar => confirmar,
+              LIGHT     => LIGHT,
+              igual     => igual,
+              menor     => menor,
+              fijo      => fijo,
+              vending   => vending);
+
+  clk_process :process
+  begin
+    clk <= '0';
+    wait for 0.5 * clk_period;
+    clk <= '1';
+    wait for 0.5 * clk_period;
+  end process;
+
+  reset <= '1' after 0.25 * clk_period, '0' after 0.75 * clk_period;
+
+    stimuli : process
+    begin
+        producto <= (others => '0');
+        confirmar <= '0';
+        igual <= '0';
+        menor <= '0';
+
+
+        -- Test
+        wait for 100 * clk_period;
+        
+        wait;
+    end process;
