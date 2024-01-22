@@ -33,31 +33,32 @@ begin
     begin
         precio <= (others => '0');
         introducido <= (others => '0');
+        wait for 20 ns;
 
         -- TEST
         precio <= "0110";
         introducido <= "1000";
         wait for 20 ns;
         assert mayor = '1'
-          report "Test no ok. Deberia ser mayor".
+          report "Test no ok. Deberia ser mayor."
           severity failure;
 
         precio <= "0110";
         introducido <= "0010";
         wait for 20 ns;
         assert menor = '1'
-          report "Test no ok. Deberia ser menor".
+          report "Test no ok. Deberia ser menor."
           severity failure;
 
         precio <= "0110";
         introducido <= "0110";
         wait for 20 ns;
         assert igual = '1'
-          report "Test no ok. Deberia ser menor".
+          report "Test no ok. Deberia ser menor."
           severity failure;
 
         assert false
-          report "Simulacion correcta".
+          report "Simulacion correcta."
           severity failure;
 
         wait;
