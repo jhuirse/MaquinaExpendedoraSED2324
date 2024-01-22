@@ -44,7 +44,7 @@ begin
    --Activar display, cada display se iluminará durante 1/8 ciclo, es decir 2ms
    process(anodos)
      begin
-     numero <= to_integer(unsigned(cuenta));
+     numero <= to_integer(unsigned(fijo));
       if numero<=14 then --entre 0€ a 1.4€
          case anodos is
            when 5=>digsel <="11111110";
